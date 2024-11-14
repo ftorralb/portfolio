@@ -71,6 +71,17 @@ section {
   top: 0;
 }
 
+ul.inline-list{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.inline-list li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
 #navbar a {
   float: right;
   display: block;
