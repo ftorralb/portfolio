@@ -1,57 +1,836 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="Felipe Torralba's portfolio showcasing skills in IoT, DevOps, and Web Development.">
-  <meta name="keywords" content="Felipe Torralba, Computer Science, IoT, DevOps, Web Development, Portfolio">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <title>Felipe Torralba | Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Portafolio de Felipe Torralba — Machine Learning Engineer / SRE | Ingeniero Civil en Computación (U. de Chile). Especializado en Cloud, Kubernetes, FinOps e IA Generativa.">
+  <meta name="keywords" content="Felipe Torralba, SRE, Machine Learning Engineer, MLOps, Cloud, AWS, EKS, ECS, FinOps, Kubernetes, Python, FastAPI, Santiago, Chile">
+  <title>Felipe Torralba | ML Engineer & SRE</title>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            terminal: {
+              bg: '#0a0e17',
+              card: '#111827',
+              border: '#1f2937',
+              accent: '#10b981',
+              cyan: '#06b6d4'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Subtle background grid pattern for SRE/Cloud aesthetic */
+    .bg-grid-pattern {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    /* Blinking cursor for terminal */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .cursor-blink {
+      animation: blink 1.1s infinite;
+    }
+  </style>
 </head>
-<body>
-  <!-- Header Section -->
-  <header>
-    <h1>Felipe Torralba</h1>
-    <p>Computer Science Student | Developer | Tech Enthusiast</p>
-    <nav>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+<body class="bg-slate-50 text-slate-900 dark:bg-[#090d16] dark:text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-white transition-colors duration-300 bg-grid-pattern min-h-screen flex flex-col">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-[#090d16]/85 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Brand / Terminal Prompt -->
+      <a href="#" class="font-mono font-semibold text-sm sm:text-base tracking-tight flex items-center gap-2 group">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-slate-500 dark:text-slate-400">ftorralb@sre</span>
+        <span class="text-emerald-600 dark:text-emerald-400 group-hover:translate-x-0.5 transition-transform">:~$</span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
+        <a href="#about" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" data-i18n="nav_about">Sobre mí</a>
+        <a href="#experience" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" data-i18n="nav_experience">Experiencia</a>
+        <a href="#projects" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" data-i18n="nav_projects">Proyectos & Lab</a>
+        <a href="#skills" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" data-i18n="nav_skills">Stack Técnico</a>
+      </nav>
+
+      <!-- Action Controls: Social Links, Lang Toggle, Theme Toggle, Mobile Menu -->
+      <div class="flex items-center gap-2 sm:gap-2.5">
+        <!-- Quick Social Icons in Navbar -->
+        <a href="https://www.linkedin.com/in/ftorralba/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hidden sm:inline-flex p-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 hover:border-emerald-500 dark:hover:border-emerald-500 hover:text-emerald-500 transition-all">
+          <i class="fa-brands fa-linkedin-in text-sm"></i>
+        </a>
+        <a href="https://github.com/ftorralb" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="hidden sm:inline-flex p-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 hover:border-emerald-500 dark:hover:border-emerald-500 hover:text-emerald-500 transition-all">
+          <i class="fa-brands fa-github text-sm"></i>
+        </a>
+
+        <!-- Language Toggle Button -->
+        <button id="lang-toggle" type="button" aria-label="Cambiar idioma" class="font-mono text-xs font-semibold px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 hover:border-emerald-500 dark:hover:border-emerald-500 transition-all flex items-center gap-1.5">
+          <i class="fa-solid fa-globe text-emerald-500"></i>
+          <span id="lang-label">ES</span>
+        </button>
+
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" type="button" aria-label="Cambiar tema" class="p-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200 hover:border-emerald-500 dark:hover:border-emerald-500 transition-all">
+          <i id="theme-icon" class="fa-solid fa-sun text-amber-400 text-sm"></i>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" type="button" aria-label="Abrir menú" class="md:hidden p-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/80 text-slate-700 dark:text-slate-200">
+          <i class="fa-solid fa-bars text-sm"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-[#090d16]/95 px-4 pt-2 pb-4 space-y-2 text-sm font-medium">
+      <a href="#about" class="block py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60" data-i18n="nav_about">Sobre mí</a>
+      <a href="#experience" class="block py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60" data-i18n="nav_experience">Experiencia</a>
+      <a href="#projects" class="block py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60" data-i18n="nav_projects">Proyectos & Lab</a>
+      <a href="#skills" class="block py-2 px-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60" data-i18n="nav_skills">Stack Técnico</a>
+      <div class="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center gap-3 px-3">
+        <a href="https://www.linkedin.com/in/ftorralba/" target="_blank" rel="noopener noreferrer" class="text-slate-600 dark:text-slate-300 hover:text-emerald-500 font-mono text-xs flex items-center gap-1.5">
+          <i class="fa-brands fa-linkedin text-sm text-emerald-500"></i> /in/ftorralba
+        </a>
+        <a href="https://github.com/ftorralb" target="_blank" rel="noopener noreferrer" class="text-slate-600 dark:text-slate-300 hover:text-emerald-500 font-mono text-xs flex items-center gap-1.5">
+          <i class="fa-brands fa-github text-sm text-emerald-500"></i> @ftorralb
+        </a>
+      </div>
+    </div>
   </header>
 
+  <!-- Main Content Container -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 space-y-24">
 
-  <!-- About Section -->
-  <section id="about">
-  <h2>About Me</h2>
-    <p>I started coding as a self-taught learner during school, and my first programming language was Python. Since then, I've developed a strong interest in IoT, DevOps, and Web Development.</p>
+    <!-- HERO SECTION -->
+    <section id="about" class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center pt-2">
+      
+      <!-- Left Column: Bio & Primary Actions -->
+      <div class="lg:col-span-7 space-y-6">
+        <!-- Status Pill -->
+        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span data-i18n="hero_badge">Machine Learning Engineer / SRE @ Entel</span>
+        </div>
 
-    <p>I’m also a big fan of Linux and currently use Arch with Sway as my window manager. Customizing my desktop environment to perfectly suit my needs has, funnily enough, become a bit of a hobby, and I enjoy spending time tinkering with my setup.</p>
-  </section>
+        <!-- Name & Headline -->
+        <div class="space-y-3">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            Felipe Torralba
+          </h1>
+          <p class="text-lg sm:text-xl font-medium text-emerald-600 dark:text-emerald-400 font-mono" data-i18n="hero_role">
+            Ingeniero Civil en Computación · Cloud & SRE · FinOps & GenAI
+          </p>
+        </div>
 
+        <!-- Bio Description -->
+        <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl" data-i18n="hero_bio">
+          Ingeniero Civil en Computación de la Universidad de Chile especializado en infraestructura cloud, orquestación de contenedores (AWS EKS/ECS, Docker, Kubernetes), FinOps, ingeniería de plataformas y operación de sistemas críticos. Integro flujos de trabajo agénticos locales (Claude Code, arquitecturas MCP y gestión de contexto) para acelerar el desarrollo, code reviews y despliegues en producción.
+        </p>
 
-  <!-- Skills Section -->
-  <section id="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li><i class="fas fa-code"></i> Programming Languages: Python, C++, Java, JavaScript</li>
-      <li><i class="fas fa-tools"></i> Technologies: Django, Docker, Celery, Pandas</li>
-      <li><i class="fas fa-git-alt"></i> Version Control: Git, GitHub</li>
-    </ul>
-  </section>
+        <!-- Quick Metadata Pills -->
+        <div class="flex flex-wrap items-center gap-4 text-xs sm:text-sm font-mono text-slate-500 dark:text-slate-400 pt-1">
+          <span class="flex items-center gap-1.5">
+            <i class="fa-solid fa-location-dot text-emerald-500"></i> Santiago, Chile
+          </span>
+          <span class="flex items-center gap-1.5">
+            <i class="fa-solid fa-graduation-cap text-cyan-500"></i> DCC, Universidad de Chile (2019–2026)
+          </span>
+          <span class="flex items-center gap-1.5">
+            <i class="fa-brands fa-linux text-amber-500"></i> Debian / Docker / K8s
+          </span>
+        </div>
 
+        <!-- CTA Buttons (LinkedIn & GitHub only, zero personal email exposure) -->
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <a href="https://www.linkedin.com/in/ftorralba/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl font-medium text-sm bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/20 transition-all">
+            <i class="fa-brands fa-linkedin text-base"></i>
+            <span>LinkedIn (/in/ftorralba)</span>
+          </a>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:ftorralb@dcc.uchile.cl">ftorralb@dcc.uchile.cl</a></p>
-    <p>GitHub: <a href="https://github.com/elegoose" target="_blank">github.com/elegoose</a></p>
-  </section>
+          <a href="https://github.com/ftorralb" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl font-medium text-sm border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 hover:border-emerald-500 dark:hover:border-emerald-500 text-slate-800 dark:text-slate-200 transition-all">
+            <i class="fa-brands fa-github text-base"></i>
+            <span>github.com/ftorralb</span>
+          </a>
+        </div>
+      </div>
 
+      <!-- Right Column: Interactive SRE / Terminal Card -->
+      <div class="lg:col-span-5">
+        <div class="rounded-2xl overflow-hidden border border-slate-300 dark:border-slate-800 bg-slate-900 text-slate-100 shadow-2xl">
+          <!-- Terminal Titlebar -->
+          <div class="bg-slate-800/90 px-4 py-3 flex items-center justify-between border-b border-slate-700/80">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-rose-500/90"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-400/90"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500/90"></span>
+            </div>
+            <div class="font-mono text-xs text-slate-400 flex items-center gap-1.5">
+              <i class="fa-solid fa-terminal text-emerald-400"></i>
+              <span>zsh — ftorralb@cloud-node</span>
+            </div>
+            <div class="flex gap-1">
+              <button onclick="switchTerminalTab('neofetch')" id="tab-neofetch" class="font-mono text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">profile.sh</button>
+              <button onclick="switchTerminalTab('stack')" id="tab-stack" class="font-mono text-[11px] px-2 py-0.5 rounded text-slate-400 hover:text-slate-200">kubectl</button>
+            </div>
+          </div>
 
+          <!-- Terminal Body -->
+          <div class="p-5 font-mono text-xs sm:text-[13px] leading-relaxed space-y-3 min-h-[290px]">
+            <!-- Tab 1: Profile Summary -->
+            <div id="term-content-neofetch" class="space-y-2.5">
+              <div class="text-slate-400">
+                <span class="text-emerald-400">ftorralb@santiago</span>:<span class="text-cyan-400">~</span>$ ./profile.sh --verbose
+              </div>
+              <div class="grid grid-cols-1 gap-1.5 pl-2 border-l-2 border-emerald-500/40 text-slate-300">
+                <div><span class="text-cyan-400 font-semibold">ROLE:</span> ML Engineer / SRE (Platform & Tooling)</div>
+                <div><span class="text-cyan-400 font-semibold">COMPANY:</span> Entel (Santiago, CL)</div>
+                <div><span class="text-cyan-400 font-semibold">DEGREE:</span> Ing. Civil en Computación @ U. de Chile</div>
+                <div><span class="text-cyan-400 font-semibold">CLOUD & ORCH:</span> AWS (ECS, EKS, IAM), Docker, K8s</div>
+                <div><span class="text-cyan-400 font-semibold">FINOPS:</span> Kubecost, Multi-Provider Cost Platform</div>
+                <div><span class="text-cyan-400 font-semibold">AGENTIC DEV:</span> Claude Code, MCP, Context Workflows</div>
+                <div><span class="text-cyan-400 font-semibold">LINKS:</span> <a href="https://github.com/ftorralb" target="_blank" rel="noopener noreferrer" class="underline hover:text-emerald-400">github.com/ftorralb</a> · <a href="https://www.linkedin.com/in/ftorralba/" target="_blank" rel="noopener noreferrer" class="underline hover:text-emerald-400">in/ftorralba</a></div>
+              </div>
+              <div class="pt-2 text-slate-400 flex items-center gap-1">
+                <span class="text-emerald-400">ftorralb@santiago</span>:<span class="text-cyan-400">~</span>$ <span class="text-slate-200">status --systems</span>
+              </div>
+              <div class="text-emerald-400 pl-2">
+                ✓ All systems operational · Cloud & AI Platforms<span class="cursor-blink">_</span>
+              </div>
+            </div>
+
+            <!-- Tab 2: Simulated Kubectl / Pods Output -->
+            <div id="term-content-stack" class="hidden space-y-2.5">
+              <div class="text-slate-400">
+                <span class="text-emerald-400">ftorralb@santiago</span>:<span class="text-cyan-400">~</span>$ kubectl get workloads -n production
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-[11px] sm:text-xs">
+                  <thead>
+                    <tr class="text-slate-400 border-b border-slate-800">
+                      <th class="pb-1.5">NAME</th>
+                      <th class="pb-1.5">READY</th>
+                      <th class="pb-1.5">STATUS</th>
+                      <th class="pb-1.5">AGE</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-slate-300 divide-y divide-slate-800/60">
+                    <tr>
+                      <td class="py-1.5 text-cyan-300">finops-central-platform</td>
+                      <td>3/3</td>
+                      <td class="text-emerald-400">Running</td>
+                      <td>2026</td>
+                    </tr>
+                    <tr>
+                      <td class="py-1.5 text-cyan-300">eks-vs-ecs-kubecost-poc</td>
+                      <td>1/1</td>
+                      <td class="text-amber-300">Evaluated</td>
+                      <td>2026</td>
+                    </tr>
+                    <tr>
+                      <td class="py-1.5 text-cyan-300">mcp-agentic-workflow</td>
+                      <td>2/2</td>
+                      <td class="text-emerald-400">Running</td>
+                      <td>2026</td>
+                    </tr>
+                    <tr>
+                      <td class="py-1.5 text-cyan-300">debian-homelab-node</td>
+                      <td>1/1</td>
+                      <td class="text-emerald-400">Running</td>
+                      <td>3y</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="pt-1 text-slate-400">
+                <span class="text-emerald-400">ftorralb@santiago</span>:<span class="text-cyan-400">~</span>$ <span class="cursor-blink">_</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- EXPERIENCE TIMELINE SECTION -->
+    <section id="experience" class="space-y-10 scroll-mt-20">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold" data-i18n="exp_subtitle">// TRAYECTORIA PROFESIONAL</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1" data-i18n="exp_title">Experiencia & Educación</h2>
+        </div>
+        <div class="font-mono text-xs text-slate-500 dark:text-slate-400" data-i18n="exp_edu_badge">
+          U. de Chile · Ingeniería Civil en Computación (2019 – 2026)
+        </div>
+      </div>
+
+      <!-- Timeline List -->
+      <div class="relative border-l-2 border-slate-200 dark:border-slate-800 ml-3 sm:ml-4 space-y-10">
+
+        <!-- 1. Entel -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-500 ring-4 ring-slate-50 dark:ring-[#090d16]"></span>
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200/90 dark:border-slate-800 hover:border-emerald-500/50 transition-all shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
+              <div>
+                <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                  Machine Learning Engineer / SRE <span class="text-emerald-600 dark:text-emerald-400 font-mono text-sm font-normal">(Platform & Tooling)</span>
+                </h3>
+                <p class="text-sm font-semibold text-slate-600 dark:text-slate-300">Entel · Santiago, Chile</p>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 w-fit" data-i18n="exp_entel_date">
+                Ene. 2026 – Presente
+              </span>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside leading-relaxed">
+              <li data-i18n="exp_entel_1">Evaluación arquitectónica y financiera (PoC) para la migración de microservicios desde Amazon ECS hacia Amazon EKS, implementando Kubecost para el modelamiento de costos y determinando la no viabilidad del cambio para evitar sobrecostos operacionales.</li>
+              <li data-i18n="exp_entel_2">Conceptualización, diseño arquitectónico y desarrollo activo de una plataforma interna FinOps para centralizar la visibilidad del gasto de múltiples proveedores cloud e IA.</li>
+              <li data-i18n="exp_entel_3">Operación continua de infraestructura crítica y despliegues de IA generativa, administración de accesos bajo principio de mínimo privilegio mediante políticas y roles de AWS IAM, y automatización con flujos agénticos (Claude Code / MCP).</li>
+            </ul>
+            <div class="flex flex-wrap gap-2 mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/80 font-mono text-[11px]">
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">AWS ECS / EKS</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">AWS IAM</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Kubecost</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">FinOps</span>
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Claude Code & MCP</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Memoria de Título -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-cyan-500 ring-4 ring-slate-50 dark:ring-[#090d16]"></span>
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200/90 dark:border-slate-800 hover:border-cyan-500/40 transition-all shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="exp_thesis_role">
+                  Memoria de Título (Ingeniería Civil en Computación)
+                </h3>
+                <p class="text-sm font-semibold text-slate-600 dark:text-slate-300">Universidad de Chile & Metro de Santiago · Santiago, Chile</p>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 w-fit" data-i18n="exp_thesis_date">
+                Jul. 2025 – Mar. 2026
+              </span>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside leading-relaxed">
+              <li data-i18n="exp_thesis_1">Revisión sistemática y análisis de arquitecturas de video analítica para sistemas de CCTV a gran escala en transporte público.</li>
+              <li data-i18n="exp_thesis_2">Evaluación técnica y económica de enfoques edge, cloud e híbridos considerando despliegue, escalabilidad, costos operacionales y operación de modelos de ML en producción.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 3. Freelance Fullstack -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-600 ring-4 ring-slate-50 dark:ring-[#090d16]"></span>
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200/90 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 transition-all shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="exp_free_role">
+                  Desarrollador Fullstack Freelance
+                </h3>
+                <p class="text-sm font-semibold text-slate-600 dark:text-slate-300" data-i18n="exp_free_org">Proyecto Gestión de Pabellones · Remoto</p>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 w-fit" data-i18n="exp_free_date">
+                May. 2025 – Ene. 2026
+              </span>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside leading-relaxed">
+              <li data-i18n="exp_free_1">Desarrollo de sistema de administración utilizando FastAPI, Alembic y Docker en el backend para asegurar portabilidad y escalabilidad.</li>
+              <li data-i18n="exp_free_2">Implementación de frontend con React y Next.js.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4. Ayudante - Proyecto de Software -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-600 ring-4 ring-slate-50 dark:ring-[#090d16]"></span>
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200/90 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 transition-all shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="exp_ta_role">
+                  Ayudante - Proyecto de Software
+                </h3>
+                <p class="text-sm font-semibold text-slate-600 dark:text-slate-300">Universidad de Chile · Santiago, Chile</p>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 w-fit" data-i18n="exp_ta_date">
+                Jul. 2025 – Dic. 2025
+              </span>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside leading-relaxed">
+              <li data-i18n="exp_ta_1">Mentoría a equipos de desarrollo en la gestión de la comunicación con clientes, enfocada en la negociación de alcance y levantamiento de requerimientos.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 5. Calmly & U. de Chile -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-600 ring-4 ring-slate-50 dark:ring-[#090d16]"></span>
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200/90 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 transition-all shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="exp_calmly_role">
+                  Ingeniero de Software (Proyecto de Software)
+                </h3>
+                <p class="text-sm font-semibold text-slate-600 dark:text-slate-300">Universidad de Chile & Calmly · Santiago, Chile</p>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 w-fit" data-i18n="exp_calmly_date">
+                Mar. 2025 – Jun. 2025
+              </span>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside leading-relaxed">
+              <li data-i18n="exp_calmly_1">Diseño y remodelación de sistema para procesamiento de datos y prevención de fallas en maquinaria minera.</li>
+              <li data-i18n="exp_calmly_2">Implementación de arquitectura basada en microservicios containerizados, orquestando procesamiento asíncrono con Celery y Redis, además de pipelines y APIs para consumo de resultados.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 6. NotCo -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-600 ring-4 ring-slate-50 dark:ring-[#090d16]"></span>
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200/90 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 transition-all shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="exp_notco_role">
+                  Ingeniero de Software (Práctica Profesional)
+                </h3>
+                <p class="text-sm font-semibold text-slate-600 dark:text-slate-300">The Not Company (NotCo) · Santiago, Chile</p>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 w-fit" data-i18n="exp_notco_date">
+                Ene. 2025 – Mar. 2025
+              </span>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside leading-relaxed">
+              <li data-i18n="exp_notco_1">Desarrollo de funcionalidades Fullstack para plataforma B2B utilizando Vue y FastAPI, integrando pruebas automatizadas End-to-End y unitarias.</li>
+              <li data-i18n="exp_notco_2">Participación en migración de base de datos desde MongoDB a PostgreSQL implementando modelos con SQLAlchemy, bajo metodologías ágiles y Code Reviews.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 7. Vigigo -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-600 ring-4 ring-slate-50 dark:ring-[#090d16]"></span>
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200/90 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 transition-all shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="exp_vigigo_role">
+                  Ingeniero de Software
+                </h3>
+                <p class="text-sm font-semibold text-slate-600 dark:text-slate-300" data-i18n="exp_vigigo_org">Vigigo · Remoto</p>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 w-fit" data-i18n="exp_vigigo_date">
+                Ene. 2023 – Oct. 2023
+              </span>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside leading-relaxed">
+              <li data-i18n="exp_vigigo_1">Implementación de descargas en segundo plano con Celery, notificaciones de usuario, generación de reportes (PDF/Excel) y diseño de esquemas de base de datos y componentes Fullstack.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 8. Docencia, Liderazgo y Voluntariado -->
+        <div class="relative pl-6 sm:pl-8 group">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-400 dark:bg-slate-600 ring-4 ring-slate-50 dark:ring-[#090d16]"></span>
+          <div class="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200/90 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 transition-all shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="exp_vol_role">
+                  Docencia, Liderazgo y Voluntariado
+                </h3>
+                <p class="text-sm font-semibold text-slate-600 dark:text-slate-300">DCC U. de Chile, Fundación Mustakis & Niñas Pro · Santiago, Chile</p>
+              </div>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 w-fit" data-i18n="exp_vol_date">
+                Dic. 2023 – Jun. 2025
+              </span>
+            </div>
+            <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 list-disc list-inside leading-relaxed">
+              <li data-i18n="exp_vol_1">Directiva de Docencia en Centro de Alumnos DCC (OpinaDCC) y tutor de programación y ciberseguridad en talleres STEM para jóvenes.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS & HOMELAB SECTION -->
+    <section id="projects" class="space-y-8 scroll-mt-20">
+      <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+        <span class="font-mono text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold" data-i18n="proj_subtitle">// ARQUITECTURA & SELF-HOSTING</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1" data-i18n="proj_title">Proyectos Destacados & Homelab</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Project 1: Homelab -->
+        <div class="rounded-2xl p-6 bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 transition-all flex flex-col justify-between shadow-sm">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500">
+                <i class="fa-solid fa-server text-lg"></i>
+              </span>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">Self-Hosted</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="proj_1_title">Home Server & Linux Lab</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="proj_1_desc">
+              Administración de servidor propio corriendo Debian 12 y contenedores Docker para despliegue, monitoreo, hosting web y laboratorio de pruebas de infraestructura y MLOps.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 pt-5 mt-4 border-t border-slate-100 dark:border-slate-800 font-mono text-[11px] text-slate-500 dark:text-slate-400">
+            <span>#Debian12</span>
+            <span>#Docker</span>
+            <span>#Linux</span>
+            <span>#Networking</span>
+          </div>
+        </div>
+
+        <!-- Project 2: FinOps Platform -->
+        <div class="rounded-2xl p-6 bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 transition-all flex flex-col justify-between shadow-sm">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-500">
+                <i class="fa-solid fa-chart-pie text-lg"></i>
+              </span>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20" data-i18n="proj_2_status">En Desarrollo</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="proj_2_title">Plataforma Centralizada FinOps</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="proj_2_desc">
+              Diseño arquitectónico y construcción de una plataforma interna para consolidar métricas de gasto cloud multi-proveedor, junto con modelamiento de costos en clústeres mediante Kubecost.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 pt-5 mt-4 border-t border-slate-100 dark:border-slate-800 font-mono text-[11px] text-slate-500 dark:text-slate-400">
+            <span>#FinOps</span>
+            <span>#AWS</span>
+            <span>#Kubecost</span>
+            <span>#CloudCost</span>
+          </div>
+        </div>
+
+        <!-- Project 3: Video Analytics & Agentic Flows -->
+        <div class="rounded-2xl p-6 bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 transition-all flex flex-col justify-between shadow-sm">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400">
+                <i class="fa-solid fa-robot text-lg"></i>
+              </span>
+              <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-300 border border-purple-500/20">GenAI & Edge/Cloud</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="proj_3_title">Flujos Agénticos & Arquitecturas ML</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed" data-i18n="proj_3_desc">
+              Integración de agentes locales (Claude Code, servidores MCP) para automatizar ciclos de ingeniería, y evaluación de arquitecturas Edge/Cloud para analítica de video a gran escala.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 pt-5 mt-4 border-t border-slate-100 dark:border-slate-800 font-mono text-[11px] text-slate-500 dark:text-slate-400">
+            <span>#MCP</span>
+            <span>#ClaudeCode</span>
+            <span>#MLOps</span>
+            <span>#EdgeCloud</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNICAL SKILLS SECTION -->
+    <section id="skills" class="space-y-8 scroll-mt-20">
+      <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+        <span class="font-mono text-xs uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold" data-i18n="skills_subtitle">// STACK TECNOLÓGICO</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1" data-i18n="skills_title">Habilidades Técnicas</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Category 1: Cloud, Infra & SRE -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-cloud text-emerald-500 text-xl"></i>
+            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="skill_cat_1">Cloud, Infraestructura & SRE</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">AWS (ECS, EKS, IAM)</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Kubernetes</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Docker</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Kubecost (FinOps)</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Linux (Debian / WSL2)</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">CI/CD</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Git</span>
+          </div>
+        </div>
+
+        <!-- Category 2: GenAI & Backend -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-microchip text-cyan-500 text-xl"></i>
+            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="skill_cat_2">IA Generativa & Backend</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Python (Avanzado)</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Agentes de IA</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Model Context Protocol (MCP)</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Claude Code</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">FastAPI</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Celery & Redis</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">SQLAlchemy / Alembic</span>
+          </div>
+        </div>
+
+        <!-- Category 3: Languages & Frontend -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
+          <div class="flex items-center gap-3">
+            <i class="fa-solid fa-code text-purple-500 text-xl"></i>
+            <h3 class="font-bold text-slate-900 dark:text-white" data-i18n="skill_cat_3">Lenguajes & Desarrollo Web</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">SQL (PostgreSQL)</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Bash / Shell</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">JavaScript</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">React & Next.js</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">Vue.js</span>
+            <span class="px-3 py-1.5 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">C++</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Minimalist Footer with LinkedIn & GitHub -->
+  <footer class="border-t border-slate-200/80 dark:border-slate-800/80 py-8 mt-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
+      <div>
+        © 2026 Felipe Torralba · Ingeniero Civil en Computación (U. de Chile)
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="https://www.linkedin.com/in/ftorralba/" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-500 transition-colors flex items-center gap-1.5">
+          <i class="fa-brands fa-linkedin text-sm"></i>
+          <span>linkedin.com/in/ftorralba</span>
+        </a>
+        <a href="https://github.com/ftorralb" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-500 transition-colors flex items-center gap-1.5">
+          <i class="fa-brands fa-github text-sm"></i>
+          <span>github.com/ftorralb</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Scripts: Bilingual Dictionary, Theme Switcher & Terminal Tabs -->
+  <script>
+    const translations = {
+      es: {
+        nav_about: "Sobre mí",
+        nav_experience: "Experiencia",
+        nav_projects: "Proyectos & Lab",
+        nav_skills: "Stack Técnico",
+        hero_badge: "Machine Learning Engineer / SRE @ Entel",
+        hero_role: "Ingeniero Civil en Computación · Cloud & SRE · FinOps & GenAI",
+        hero_bio: "Ingeniero Civil en Computación de la Universidad de Chile especializado en infraestructura cloud, orquestación de contenedores (AWS EKS/ECS, Docker, Kubernetes), FinOps, ingeniería de plataformas y operación de sistemas críticos. Integro flujos de trabajo agénticos locales (Claude Code, arquitecturas MCP y gestión de contexto) para acelerar el desarrollo, code reviews y despliegues en producción.",
+        exp_subtitle: "// TRAYECTORIA PROFESIONAL",
+        exp_title: "Experiencia & Educación",
+        exp_edu_badge: "U. de Chile · Ingeniería Civil en Computación (2019 – 2026)",
+        exp_entel_date: "Ene. 2026 – Presente",
+        exp_entel_1: "Evaluación arquitectónica y financiera (PoC) para la migración de microservicios desde Amazon ECS hacia Amazon EKS, implementando Kubecost para el modelamiento de costos y determinando la no viabilidad del cambio para evitar sobrecostos operacionales.",
+        exp_entel_2: "Conceptualización, diseño arquitectónico y desarrollo activo de una plataforma interna FinOps para centralizar la visibilidad del gasto de múltiples proveedores cloud e IA.",
+        exp_entel_3: "Operación continua de infraestructura crítica y despliegues de IA generativa, administración de accesos bajo principio de mínimo privilegio mediante políticas y roles de AWS IAM, y automatización con flujos agénticos (Claude Code / MCP).",
+        exp_thesis_role: "Memoria de Título (Ingeniería Civil en Computación)",
+        exp_thesis_date: "Jul. 2025 – Mar. 2026",
+        exp_thesis_1: "Revisión sistemática y análisis de arquitecturas de video analítica para sistemas de CCTV a gran escala en transporte público.",
+        exp_thesis_2: "Evaluación técnica y económica de enfoques edge, cloud e híbridos considerando despliegue, escalabilidad, costos operacionales y operación de modelos de ML en producción.",
+        exp_free_role: "Desarrollador Fullstack Freelance",
+        exp_free_org: "Proyecto Gestión de Pabellones · Remoto",
+        exp_free_date: "May. 2025 – Ene. 2026",
+        exp_free_1: "Desarrollo de sistema de administración utilizando FastAPI, Alembic y Docker en el backend para asegurar portabilidad y escalabilidad.",
+        exp_free_2: "Implementación de frontend con React y Next.js.",
+        exp_ta_role: "Ayudante - Proyecto de Software",
+        exp_ta_date: "Jul. 2025 – Dic. 2025",
+        exp_ta_1: "Mentoría a equipos de desarrollo en la gestión de la comunicación con clientes, enfocada en la negociación de alcance y levantamiento de requerimientos.",
+        exp_calmly_role: "Ingeniero de Software (Proyecto de Software)",
+        exp_calmly_date: "Mar. 2025 – Jun. 2025",
+        exp_calmly_1: "Diseño y remodelación de sistema para procesamiento de datos y prevención de fallas en maquinaria minera.",
+        exp_calmly_2: "Implementación de arquitectura basada en microservicios containerizados, orquestando procesamiento asíncrono con Celery y Redis, además de pipelines y APIs para consumo de resultados.",
+        exp_notco_role: "Ingeniero de Software (Práctica Profesional)",
+        exp_notco_date: "Ene. 2025 – Mar. 2025",
+        exp_notco_1: "Desarrollo de funcionalidades Fullstack para plataforma B2B utilizando Vue y FastAPI, integrando pruebas automatizadas End-to-End y unitarias.",
+        exp_notco_2: "Participación en migración de base de datos desde MongoDB a PostgreSQL implementando modelos con SQLAlchemy, bajo metodologías ágiles y Code Reviews.",
+        exp_vigigo_role: "Ingeniero de Software",
+        exp_vigigo_org: "Vigigo · Remoto",
+        exp_vigigo_date: "Ene. 2023 – Oct. 2023",
+        exp_vigigo_1: "Implementación de descargas en segundo plano con Celery, notificaciones de usuario, generación de reportes (PDF/Excel) y diseño de esquemas de base de datos y componentes Fullstack.",
+        exp_vol_role: "Docencia, Liderazgo y Voluntariado",
+        exp_vol_date: "Dic. 2023 – Jun. 2025",
+        exp_vol_1: "Directiva de Docencia en Centro de Alumnos DCC (OpinaDCC) y tutor de programación y ciberseguridad en talleres STEM para jóvenes.",
+        proj_subtitle: "// ARQUITECTURA & SELF-HOSTING",
+        proj_title: "Proyectos Destacados & Homelab",
+        proj_1_title: "Home Server & Linux Lab",
+        proj_1_desc: "Administración de servidor propio corriendo Debian 12 y contenedores Docker para despliegue, monitoreo, hosting web y laboratorio de pruebas de infraestructura y MLOps.",
+        proj_2_status: "En Desarrollo",
+        proj_2_title: "Plataforma Centralizada FinOps",
+        proj_2_desc: "Diseño arquitectónico y construcción de una plataforma interna para consolidar métricas de gasto cloud multi-proveedor, junto con modelamiento de costos en clústeres mediante Kubecost.",
+        proj_3_title: "Flujos Agénticos & Arquitecturas ML",
+        proj_3_desc: "Integración de agentes locales (Claude Code, servidores MCP) para automatizar ciclos de ingeniería, y evaluación de arquitecturas Edge/Cloud para analítica de video a gran escala.",
+        skills_subtitle: "// STACK TECNOLÓGICO",
+        skills_title: "Habilidades Técnicas",
+        skill_cat_1: "Cloud, Infraestructura & SRE",
+        skill_cat_2: "IA Generativa & Backend",
+        skill_cat_3: "Lenguajes & Desarrollo Web"
+      },
+      en: {
+        nav_about: "About",
+        nav_experience: "Experience",
+        nav_projects: "Projects & Lab",
+        nav_skills: "Tech Stack",
+        hero_badge: "Machine Learning Engineer / SRE @ Entel",
+        hero_role: "Computer Science Engineer · Cloud & SRE · FinOps & GenAI",
+        hero_bio: "Computer Science Engineer (Universidad de Chile) specializing in cloud infrastructure, container orchestration (AWS EKS/ECS, Docker, Kubernetes), FinOps, platform engineering, and critical systems operations. I leverage local agentic AI workflows (Claude Code, MCP architectures, and context engineering) to accelerate feature delivery, code reviews, and production deployments.",
+        exp_subtitle: "// CAREER TIMELINE",
+        exp_title: "Experience & Education",
+        exp_edu_badge: "U. de Chile · B.Sc. / M.Sc. Eq. in Computer Science (2019 – 2026)",
+        exp_entel_date: "Jan 2026 – Present",
+        exp_entel_1: "Architectural and financial evaluation (PoC) for migrating microservices from Amazon ECS to Amazon EKS, implementing Kubecost for cost modeling and determining non-viability to prevent operational cost overruns.",
+        exp_entel_2: "Conceptualization, architectural design, and active development of an internal FinOps platform to centralize multi-provider cloud and AI spend visibility.",
+        exp_entel_3: "Continuous operation of critical infrastructure and Generative AI deployments, least-privilege access management via AWS IAM roles/policies, and workflow automation using local AI agents (Claude Code / MCP).",
+        exp_thesis_role: "Undergraduate Engineering Thesis",
+        exp_thesis_date: "Jul 2025 – Mar 2026",
+        exp_thesis_1: "Systematic review and architectural analysis of large-scale CCTV video analytics systems for public transit.",
+        exp_thesis_2: "Technical and financial evaluation of edge, cloud, and hybrid approaches considering deployment, scalability, operational costs, and production ML operations.",
+        exp_free_role: "Freelance Fullstack Developer",
+        exp_free_org: "Healthcare Pavilion Management System · Remote",
+        exp_free_date: "May 2025 – Jan 2026",
+        exp_free_1: "Developed a backend administration system using FastAPI, Alembic, and Docker to ensure portability and scalability.",
+        exp_free_2: "Implemented modern frontend interfaces using React and Next.js.",
+        exp_ta_role: "Teaching Assistant - Software Engineering Project",
+        exp_ta_date: "Jul 2025 – Dec 2025",
+        exp_ta_1: "Mentored student development teams on client communication, focusing on scope negotiation and requirements gathering.",
+        exp_calmly_role: "Software Engineer (Software Project)",
+        exp_calmly_date: "Mar 2025 – Jun 2025",
+        exp_calmly_1: "Designed and refactored a data processing and failure-prevention system for mining machinery.",
+        exp_calmly_2: "Implemented a containerized microservices architecture orchestrating asynchronous tasks with Celery and Redis, alongside data pipelines and REST APIs.",
+        exp_notco_role: "Software Engineering Intern",
+        exp_notco_date: "Jan 2025 – Mar 2025",
+        exp_notco_1: "Fullstack feature development for a B2B platform using Vue.js and FastAPI, integrating automated End-to-End and unit tests.",
+        exp_notco_2: "Contributed to the database migration from MongoDB to PostgreSQL by implementing relational models with SQLAlchemy under agile methodologies.",
+        exp_vigigo_role: "Software Engineer",
+        exp_vigigo_org: "Vigigo · Remote",
+        exp_vigigo_date: "Jan 2023 – Oct 2023",
+        exp_vigigo_1: "Implemented background task processing with Celery, user notifications, automated PDF/Excel reporting, and fullstack database/UI components.",
+        exp_vol_role: "Teaching, Leadership & Volunteering",
+        exp_vol_date: "Dec 2023 – Jun 2025",
+        exp_vol_1: "Academic Board member at DCC Student Council (OpinaDCC) and programming/cybersecurity tutor for youth STEM workshops.",
+        proj_subtitle: "// ARCHITECTURE & SELF-HOSTING",
+        proj_title: "Featured Projects & Homelab",
+        proj_1_title: "Home Server & Linux Lab",
+        proj_1_desc: "Administration of a self-hosted Debian 12 server running Docker containers for remote service orchestration, web hosting, and local MLOps/infrastructure testing.",
+        proj_2_status: "In Development",
+        proj_2_title: "Multi-Cloud FinOps Platform",
+        proj_2_desc: "Architectural design and development of an internal platform to aggregate multi-provider cloud expenditure, paired with Kubernetes cost modeling via Kubecost.",
+        proj_3_title: "Agentic Workflows & ML Architectures",
+        proj_3_desc: "Integration of local AI agents (Claude Code, MCP servers) to streamline engineering cycles, alongside Edge/Cloud architectural evaluations for large-scale video analytics.",
+        skills_subtitle: "// TECHNICAL STACK",
+        skills_title: "Technical Skills",
+        skill_cat_1: "Cloud, Infrastructure & SRE",
+        skill_cat_2: "Generative AI & Backend",
+        skill_cat_3: "Languages & Web Development"
+      }
+    };
+
+    let currentLang = 'es';
+
+    // Language Switcher
+    const langToggleBtn = document.getElementById('lang-toggle');
+    const langLabel = document.getElementById('lang-label');
+
+    langToggleBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'es' ? 'en' : 'es';
+      langLabel.textContent = currentLang.toUpperCase();
+      document.documentElement.lang = currentLang;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) {
+          el.textContent = translations[currentLang][key];
+        }
+      });
+    });
+
+    // Dark / Light Theme Toggle
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+
+    themeToggleBtn.addEventListener('click', () => {
+      const htmlEl = document.documentElement;
+      htmlEl.classList.toggle('dark');
+      const isDark = htmlEl.classList.contains('dark');
+      themeIcon.className = isDark
+        ? 'fa-solid fa-sun text-amber-400 text-sm'
+        : 'fa-solid fa-moon text-slate-700 text-sm';
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Interactive Terminal Tabs
+    function switchTerminalTab(tab) {
+      const neofetchContent = document.getElementById('term-content-neofetch');
+      const stackContent = document.getElementById('term-content-stack');
+      const tabNeofetch = document.getElementById('tab-neofetch');
+      const tabStack = document.getElementById('tab-stack');
+
+      if (tab === 'neofetch') {
+        neofetchContent.classList.remove('hidden');
+        stackContent.classList.add('hidden');
+        tabNeofetch.className = 'font-mono text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+        tabStack.className = 'font-mono text-[11px] px-2 py-0.5 rounded text-slate-400 hover:text-slate-200';
+      } else {
+        neofetchContent.classList.add('hidden');
+        stackContent.classList.remove('hidden');
+        tabStack.className = 'font-mono text-[11px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+        tabNeofetch.className = 'font-mono text-[11px] px-2 py-0.5 rounded text-slate-400 hover:text-slate-200';
+      }
+    }
+  </script>
 </body>
 </html>
